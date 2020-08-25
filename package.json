@@ -1,0 +1,27 @@
+{
+  "name": "koa-job-queue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/budactw/koa-job-queue.git"
+  },
+  "author": "budactw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/budactw/koa-job-queue/issues"
+  },
+  "homepage": "https://github.com/budactw/koa-job-queue#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.4.0"
+  }
+}
