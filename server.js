@@ -16,6 +16,18 @@ app.use(async (ctx, next) => {
   await next();
 });
 
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (e) {
+    ctx.status = 400;
+    ctx.body = {
+      result: 'error',
+      message: e.message,
+    };
+  }
+});
+
 router.get('/telegram/get-me', async (ctx, next) => {
   ctx.body = {
     result: 'ok',
@@ -29,6 +41,10 @@ router.post('/telegram/send-message', async (ctx, next) => {
   const {
     message,
   } = ctx.form;
+
+  if (message === undefined) {
+    throw Error('Invalid message');
+  }
 
   ctx.body = {
     result: 'ok',
