@@ -4,13 +4,24 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import config from './config.js';
+import { Telegram } from './lib/telegram.js';
 
 const app = new Koa();
 const router = new Router({prefix: '/api'});
+const telegram = new Telegram();
 
 app.use(bodyParser());
 app.use(async (ctx, next) => {
   ctx.form = ctx.request.body;
+  await next();
+});
+
+router.get('/telegram/get-me', async (ctx, next) => {
+  ctx.body = {
+    result: 'ok',
+    message: await telegram.getMe(),
+  };
+
   await next();
 });
 
@@ -21,7 +32,7 @@ router.post('/telegram/send-message', async (ctx, next) => {
 
   ctx.body = {
     result: 'ok',
-    message: message,
+    message: await telegram.sendMessage(message),
   };
 
   await next();
